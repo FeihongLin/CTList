@@ -18,22 +18,22 @@
                                                         ## 0: 关闭, 1: 打开
                                                         
         "UserName": "",                                 # Input Phone Number.
-                                                        ## 天翼云网盘登陆用户名(不要带上'@189.cn').
+                                                        ## 网盘登陆用户名(不要带上'@'之后的).
                                                         
         "Password": "",                                 # Input Password.
-                                                        ## 天翼云网盘登陆密码.
+                                                        ## 网盘登陆密码.
                                                         
         "CaptchaMode": "0",                             # Captcha Mode. 0: Auto Reject, 1: Manual Input, other: API URL. 
                                                         ## 验证码. 0: 遇到验证码拒绝登陆, 1: 手动输入验证, 其他: 自动识别验证码的API.
                                                         
         "RefreshToken": "",                             # Token. * Do Not Modify It.
-                                                        ## 天翼网盘会话. 保持默认, 如果出现异常, 请将该值清空.
+                                                        ## 网盘会话. 保持默认, 如果出现异常, 请将该值清空.
                                                         
         "SubPath": "/CTList",                           # Index Path. * Unique Per Account.
                                                         ## 指定某账户挂载在网站的某个目录, 多账户时每个目录值必须唯一.
                                                         
         "RootPathId": "-11",                            # Default Root: -11
-                                                        ## 设置展示天翼网盘目录的ID, 根目录为 -11.
+                                                        ## 设置展示网盘目录的ID, 根目录为 -11.
                                                         
         "HideItemId": "0|-16",                          # Allow Folder and File.
                                                         ## 不展示某个目录或文件, 填写其ID. 每项用"|"分隔.
@@ -41,7 +41,7 @@
         "AuthItemId": "",                               # HTTP 401.
                                                         ## 加密某个目录或文件. "<文件或者目录的ID>?<加密模式>?<用户名>:<密码>"
                                                         
-        "RefreshURL": 189,                              # Min: 180, Max: 1800; Allow Max: 2329
+        "RefreshURL": 180,                              # Min: 180, Max: 1800; Allow Max: 2329
                                                         ## 下载直链缓存的秒数. 超时则被动更新.
                                                         
         "RefreshInterval": 1800                         # Max: Null, Min: 300
@@ -120,9 +120,9 @@ systemctl start ctlist
 #### 登陆 https://cloud.189.cn ;进入需要操作的目录,查看地址栏最后的数字就是这个目录的ID.
 #### 文件ID需要浏览器F12查看请求项.
 ```
-RootPathId: 列表展示的根目录对应的天翼网盘文件夹ID, 天翼网盘根目录ID为 -11 
-HideItemId: 在展示目录中隐藏天翼网盘内的文件或文件夹,填写其ID,使用 "|" 分隔
-AuthItemId: 在展示目录中加密天翼网盘内的文件或文件夹,使用 "|" 分隔
+RootPathId: 列表展示的根目录对应的网盘文件夹ID, 
+HideItemId: 在展示目录中隐藏网盘内的文件或文件夹,填写其ID,使用 "|" 分隔
+AuthItemId: 在展示目录中加密网盘内的文件或文件夹,使用 "|" 分隔
 ```
 
 # 加密目录
@@ -213,12 +213,8 @@ Usage of CTList:
 5XX: 一般是服务器端的问题. 部分可能的情况有: 主程序没开, 端口不通, 反代配置不正确.
 ```
 
-# 天翼云网盘登陆验证码识别API(基于开源OCR识别)
+# 云网盘登陆验证码识别API(基于开源OCR识别)
 ```
-# 目前去噪算法只支持天翼云网盘登陆的验证码(其他类型根本识别不出来)
-# 使用时可多次尝试下载不同的验证图片进行提交(目前准确率不算高,但可用.)
-# 下载天翼云验证码需要添加请求头 "Referer: https://open.e.189.cn/"
-
 # 接口: https://api.moeclub.org/SampleCode
 # 方式: POST
 # 参数: Base64=<IMAGE_BASE64_CODE>&Type=CTCloud
